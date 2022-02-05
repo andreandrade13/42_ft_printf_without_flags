@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printf_pointer.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: andchris <andchris1987@gmail.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/08 16:58:59 by andchris          #+#    #+#             */
+/*   Updated: 2022/01/23 20:33:37 by andchris         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+int	printf_pointer(unsigned long int pointer)
+{
+	int		i;
+	int		result;
+	char	*base;
+	char	conversion[16];
+
+	i = 0;
+	base = "0123456789abcdef";
+	if (pointer == 0)
+	{
+		printf_str("(nil)");
+		return (5);
+	}
+	while (pointer > 0)
+	{
+		conversion[i++] = base[pointer % 16];
+		pointer /= 16;
+	}
+	result = printf_str("0x");
+	while (--i >= 0)
+		result += write(1, &conversion[i], 1);
+	return (result);
+}
