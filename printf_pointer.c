@@ -23,8 +23,7 @@ int	printf_pointer(unsigned long int pointer)
 	base = "0123456789abcdef";
 	if (pointer == 0)
 	{
-		printf_str("(nil)");
-		return (5);
+		return (write(1, "0x0", 3));
 	}
 	while (pointer > 0)
 	{
